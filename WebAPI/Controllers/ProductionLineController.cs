@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Business.Abstract;
+using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,6 +13,12 @@ namespace WebAPI.Controllers
     [ApiController]
     public class ProductionLineController : ControllerBase
     {
+        private readonly IProductionLineService _productionLineService;
+
+        public ProductionLineController(IProductionLineService productionLineService)
+        {
+            _productionLineService = productionLineService;
+        }
         // GET: api/<ProductionLineController>
         [HttpGet]
         public IEnumerable<string> Get()

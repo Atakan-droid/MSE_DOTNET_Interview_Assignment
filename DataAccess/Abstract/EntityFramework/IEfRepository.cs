@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace DataAccess.Abstract.EntityFramework
 {
-    public interface IEfRepository<T> where T : class, IEntity, new()
+    public interface IEfRepository<T> where T : class, IEntity
     {
         T Get(Expression<Func<T, bool>> predicate, params Expression<Func<T, object>>[] includeProperties);
         List<T> GetAll(Expression<Func<T, bool>> predicate = null, params Expression<Func<T, object>>[] includeProperties);

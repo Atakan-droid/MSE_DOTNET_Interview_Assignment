@@ -1,4 +1,5 @@
-﻿using DataAccess.Abstract.EntityFramework;
+﻿using DataAccess.Abstract;
+using DataAccess.Abstract.EntityFramework;
 using DataAccess.Concrete.EntityFramework.Context;
 using Entities.Concrete;
 using System;
@@ -9,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace DataAccess.Concrete.EntityFramework.Repositories
 {
-    public class ProductionLineDal: EfBaseRepository<ProductionLine, EfMSE_DOTNET_Context>, IEfRepository<ProductionLine>
+    public class ProductionLineDal: EfBaseRepository<ProductionLine, EfMSE_DOTNET_Context>, IProductionLineDal
     {
     }
 }

@@ -1,4 +1,5 @@
 ﻿using Business.Abstract;
+using DataAccess.Abstract;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,5 +10,10 @@ namespace Business.Concrete
 {
     public class ProductionLineManager:IProductionLineService
     {
+        private readonly IProductionLineDal _productionLineDal;
+        public ProductionLineManager(IProductionLineDal productionLineDal)
+        {
+            _productionLineDal = productionLineDal;
+        }
     }
 }

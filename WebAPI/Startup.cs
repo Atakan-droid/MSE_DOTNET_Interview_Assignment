@@ -1,5 +1,7 @@
 using Business.Abstract;
 using Business.Concrete;
+using DataAccess.Abstract;
+using DataAccess.Concrete.EntityFramework.Repositories;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
@@ -26,6 +28,18 @@ namespace WebAPI
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddScoped<IRoleService, RoleManager>();
+            services.AddScoped<IRoleDal,RoleDal>();
+
+            services.AddScoped<IUserService, UserManager>();
+            services.AddScoped<IUserDal, UserDal>();
+
+            services.AddScoped<IProductionLineDal, ProductionLineDal>();
+            services.AddScoped<IProductionLineService, ProductionLineManager>();
+
+            services.AddScoped<IStationDal, StationDal>();
+            services.AddScoped<IStationService, StationManager>();
+
             services.AddCors(o => o.AddPolicy("MyPolicy", builder =>
             {
                 builder.AllowAnyOrigin()

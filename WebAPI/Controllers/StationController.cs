@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Business.Abstract;
+using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,6 +13,11 @@ namespace WebAPI.Controllers
     [ApiController]
     public class StationController : ControllerBase
     {
+        private readonly IStationService _stationService;
+        public StationController(IStationService stationService)
+        {
+            _stationService = stationService;
+        }
         // GET: api/<StationController>
         [HttpGet]
         public IEnumerable<string> Get()
