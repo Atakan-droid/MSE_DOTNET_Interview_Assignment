@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Business.Abstract;
+using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,11 +13,17 @@ namespace WebAPI.Controllers
     [ApiController]
     public class RoleController : ControllerBase
     {
+        private readonly IRoleService _roleService;
+        public RoleController(IRoleService roleService)
+        {
+            _roleService = roleService;
+        }
         // GET: api/<RoleController>
         [HttpGet]
         public IActionResult Get()
         {
-            return Ok("Roller");
+            
+            return Ok(_roleService.GetRoles());
         }
 
         // GET api/<RoleController>/5
