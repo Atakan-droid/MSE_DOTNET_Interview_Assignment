@@ -28,17 +28,17 @@ namespace WebAPI
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddScoped<IRoleService, RoleManager>();
-            services.AddScoped<IRoleDal,RoleDal>();
+            services.AddSingleton<IRoleService, RoleManager>();
+            services.AddSingleton<IRoleDal,RoleDal>();
 
-            services.AddScoped<IUserService, UserManager>();
-            services.AddScoped<IUserDal, UserDal>();
+            services.AddSingleton<IUserService, UserManager>();
+            services.AddSingleton<IUserDal, UserDal>();
 
-            services.AddScoped<IProductionLineDal, ProductionLineDal>();
-            services.AddScoped<IProductionLineService, ProductionLineManager>();
+            services.AddSingleton<IProductionLineDal, ProductionLineDal>();
+            services.AddSingleton<IProductionLineService, ProductionLineManager>();
 
-            services.AddScoped<IStationDal, StationDal>();
-            services.AddScoped<IStationService, StationManager>();
+            services.AddSingleton<IStationDal, StationDal>();
+            services.AddSingleton<IStationService, StationManager>();
 
             services.AddCors(o => o.AddPolicy("MyPolicy", builder =>
             {

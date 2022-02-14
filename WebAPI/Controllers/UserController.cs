@@ -1,4 +1,5 @@
 ﻿using Business.Abstract;
+using Entities.Concrete;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -18,36 +19,106 @@ namespace WebAPI.Controllers
         {
             _userService = userService;
         }
-        // GET: api/<UserController>
-        [HttpGet]
-        public IActionResult Get()
+        [HttpGet("getusers")]
+        public IActionResult GetUsers()
         {
-            return Ok(_userService.GetUsers());
+            var result = _userService.GetUsers();
+            if (result.Success)
+            {
+                return Ok(result.Data);
+            }
+            else
+            {
+                return BadRequest(result.Message);
+            }
+           
         }
 
-        // GET api/<UserController>/5
-        [HttpGet("{id}")]
-        public string Get(int id)
+
+        [HttpGet("getuserbyid/{userId}")]
+        public IActionResult GetUserById(int userId)
         {
-            return "value";
+            var result = _userService.GetUserById(userId);
+            if (result.Success)
+            {
+                return Ok(result.Data);
+            }
+            else
+            {
+                return NotFound(result.Message);
+            }
+        }
+        [HttpGet("getusersbyrole/{roleId}")]
+        public IActionResult GetUserByRole(int roleId)
+        {
+            var result = _userService.GetUsersByRole(roleId);
+            if (result.Success)
+            {
+                return Ok(result.Data);
+            }
+            else
+            {
+                return NotFound(result.Message);
+            }
         }
 
-        // POST api/<UserController>
-        [HttpPost]
-        public void Post([FromBody] string value)
+
+        [HttpPost("adduser")]
+        public IActionResult AddUser(User user)
         {
+            var result = _userService.AddUser(user);
+            if (result.Success)
+            {
+                return Ok(result.Message);
+            }
+            else
+            {
+                return BadRequest(result.Message);
+            }
         }
 
-        // PUT api/<UserController>/5
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
+       
+        [HttpPut("updateuser/{id}")]
+        public IActionResult UpdateUser(int id,User user)
         {
+            var result = _userService.UpdateUser(id,user);
+            if (result.Success)
+            {
+                return Ok(result.Message);
+            }
+            else
+            {
+                return BadRequest(result.Message);
+            }
+
+        }
+        [HttpPatch("deleteuser/{id}")]
+        public IActionResult DeleteUser(int id)
+        {
+            var result = _userService.DeleteUser(id);
+            if (result.Success)
+            {
+                return Ok(result.Message);
+            }
+            else
+            {
+                return BadRequest(result.Message);
+            }
+
         }
 
-        // DELETE api/<UserController>/5
-        [HttpDelete("{id}")]
-        public void Delete(int id)
+        [HttpDelete("harddeleteuser/{id}")]
+        public IActionResult HardDeleteUser(int id)
         {
+            var result = _userService.HardDeleteUser(id);
+            if (result.Success)
+            {
+                return Ok(result.Message);
+            }
+            else
+            {
+                return BadRequest(result.Message);
+            }
         }
     }
 }

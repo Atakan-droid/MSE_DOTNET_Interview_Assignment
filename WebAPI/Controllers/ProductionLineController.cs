@@ -1,4 +1,5 @@
 ﻿using Business.Abstract;
+using Entities.Concrete;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -19,36 +20,96 @@ namespace WebAPI.Controllers
         {
             _productionLineService = productionLineService;
         }
-        // GET: api/<ProductionLineController>
-        [HttpGet]
-        public IEnumerable<string> Get()
+
+        [HttpGet("getproductionLines")]
+        public IActionResult GetProductionLines()
         {
-            return new string[] { "value1", "value2" };
+            var result = _productionLineService.GetProductionLines();
+            if (result.Success)
+            {
+                return Ok(result.Data);
+            }
+            else
+            {
+                return BadRequest(result.Message);
+            }
+
         }
 
-        // GET api/<ProductionLineController>/5
-        [HttpGet("{id}")]
-        public string Get(int id)
+
+      
+        [HttpGet("getproductionLinesbyuser/{userId}")]
+        public IActionResult GetProductionLineByUser(int userId)
         {
-            return "value";
+            var result = _productionLineService.GetProductionLineByUser(userId);
+            if (result.Success)
+            {
+                return Ok(result.Data);
+            }
+            else
+            {
+                return NotFound(result.Message);
+            }
         }
 
-        // POST api/<ProductionLineController>
-        [HttpPost]
-        public void Post([FromBody] string value)
+
+        [HttpPost("addproductionLine")]
+        public IActionResult AddProductionLine(ProductionLine productionLine)
         {
+            var result = _productionLineService.AddProductionLine(productionLine);
+            if (result.Success)
+            {
+                return Ok(result.Message);
+            }
+            else
+            {
+                return BadRequest(result.Message);
+            }
         }
 
-        // PUT api/<ProductionLineController>/5
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
+
+        [HttpPut("updateproductionLine/{id}")]
+        public IActionResult UpdateProductionLine(int id, ProductionLine productionLine)
         {
+            var result = _productionLineService.UpdateProductionLine(id, productionLine);
+            if (result.Success)
+            {
+                return Ok(result.Message);
+            }
+            else
+            {
+                return BadRequest(result.Message);
+            }
+
+        }
+        [HttpPatch("deleteproductionLine/{id}")]
+        public IActionResult DeleteProductionLine(int id)
+        {
+            var result = _productionLineService.DeleteProductionLine(id);
+            if (result.Success)
+            {
+                return Ok(result.Message);
+            }
+            else
+            {
+                return BadRequest(result.Message);
+            }
+
         }
 
-        // DELETE api/<ProductionLineController>/5
-        [HttpDelete("{id}")]
-        public void Delete(int id)
+        [HttpDelete("harddeleteproductionLine/{id}")]
+        public IActionResult HardDeleteProductionLine(int id)
         {
+            var result = _productionLineService.HardDeleteProductionLine(id);
+            if (result.Success)
+            {
+                return Ok(result.Message);
+            }
+            else
+            {
+                return BadRequest(result.Message);
+            }
         }
+
     }
 }

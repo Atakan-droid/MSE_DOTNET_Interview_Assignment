@@ -1,4 +1,5 @@
 ﻿using Business.Abstract;
+using Entities.Concrete;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -19,36 +20,93 @@ namespace WebAPI.Controllers
             _roleService = roleService;
         }
         // GET: api/<RoleController>
-        [HttpGet]
-        public IActionResult Get()
+        [HttpGet("getroles")]
+        public IActionResult GetRoles()
         {
-            
-            return Ok(_roleService.GetRoles());
+            var result = _roleService.GetRoles();
+            if (result.Success)
+            {
+                return Ok(result.Data);
+            }
+            else
+            {
+                return BadRequest(result.Message);
+            }
+
         }
 
-        // GET api/<RoleController>/5
-        [HttpGet("{id}")]
-        public string Get(int id)
+
+        [HttpGet("getrolebyid/{roleId}")]
+        public IActionResult GetRoleById(int roleId)
         {
-            return "value";
+            var result = _roleService.GetRoleById(roleId);
+            if (result.Success)
+            {
+                return Ok(result.Data);
+            }
+            else
+            {
+                return NotFound(result.Message);
+            }
         }
 
-        // POST api/<RoleController>
-        [HttpPost]
-        public void Post([FromBody] string value)
+
+        [HttpPost("addrole")]
+        public IActionResult AddRole(Role role)
         {
+            var result = _roleService.AddRole(role);
+            if (result.Success)
+            {
+                return Ok(result.Message);
+            }
+            else
+            {
+                return BadRequest(result.Message);
+            }
         }
 
-        // PUT api/<RoleController>/5
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
+
+        [HttpPut("updaterole/{id}")]
+        public IActionResult UpdateRole(int id, Role role)
         {
+            var result = _roleService.UpdateRole(id, role);
+            if (result.Success)
+            {
+                return Ok(result.Message);
+            }
+            else
+            {
+                return BadRequest(result.Message);
+            }
+
+        }
+        [HttpPatch("deleterole/{id}")]
+        public IActionResult DeleteRole(int id)
+        {
+            var result = _roleService.DeleteRole(id);
+            if (result.Success)
+            {
+                return Ok(result.Message);
+            }
+            else
+            {
+                return BadRequest(result.Message);
+            }
+
         }
 
-        // DELETE api/<RoleController>/5
-        [HttpDelete("{id}")]
-        public void Delete(int id)
+        [HttpDelete("harddeleterole/{id}")]
+        public IActionResult HardDeleteRole(int id)
         {
+            var result = _roleService.HardDeleteRole(id);
+            if (result.Success)
+            {
+                return Ok(result.Message);
+            }
+            else
+            {
+                return BadRequest(result.Message);
+            }
         }
     }
 }

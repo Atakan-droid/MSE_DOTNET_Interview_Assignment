@@ -1,4 +1,5 @@
 ﻿using Business.Abstract;
+using Entities.Concrete;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -18,36 +19,119 @@ namespace WebAPI.Controllers
         {
             _stationService = stationService;
         }
-        // GET: api/<StationController>
-        [HttpGet]
-        public IEnumerable<string> Get()
+        [HttpGet("getstations")]
+        public IActionResult GetStations()
         {
-            return new string[] { "value1", "value2" };
+            var result = _stationService.GetStations();
+            if (result.Success)
+            {
+                return Ok(result.Data);
+            }
+            else
+            {
+                return BadRequest(result.Message);
+            }
+
         }
 
-        // GET api/<StationController>/5
-        [HttpGet("{id}")]
-        public string Get(int id)
+
+        [HttpGet("getstationbyid/{stationId}")]
+        public IActionResult GetStationById(int stationId)
         {
-            return "value";
+            var result = _stationService.GetStationById(stationId);
+            if (result.Success)
+            {
+                return Ok(result.Data);
+            }
+            else
+            {
+                return NotFound(result.Message);
+            }
+        }
+        [HttpGet("getstationsbyproductionline/{Id}")]
+        public IActionResult GetStationByProductionId(int Id)
+        {
+            var result = _stationService.GetStationByProductionLine(Id);
+            if (result.Success)
+            {
+                return Ok(result.Data);
+            }
+            else
+            {
+                return NotFound(result.Message);
+            }
+        }
+        [HttpGet("getstationsbyuser/{userId}")]
+        public IActionResult GetStationByUser(int userId)
+        {
+            var result = _stationService.GetStationByUser(userId);
+            if (result.Success)
+            {
+                return Ok(result.Data);
+            }
+            else
+            {
+                return NotFound(result.Message);
+            }
         }
 
-        // POST api/<StationController>
-        [HttpPost]
-        public void Post([FromBody] string value)
+
+        [HttpPost("addstation")]
+        public IActionResult AddStation(Station station)
         {
+            var result = _stationService.AddStation(station);
+            if (result.Success)
+            {
+                return Ok(result.Message);
+            }
+            else
+            {
+                return BadRequest(result.Message);
+            }
         }
 
-        // PUT api/<StationController>/5
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
+
+        [HttpPut("updatestation/{id}")]
+        public IActionResult UpdateStation(int id, Station station)
         {
+            var result = _stationService.UpdateStation(id, station);
+            if (result.Success)
+            {
+                return Ok(result.Message);
+            }
+            else
+            {
+                return BadRequest(result.Message);
+            }
+
+        }
+        [HttpPatch("deletestation/{id}")]
+        public IActionResult DeleteStation(int id)
+        {
+            var result = _stationService.DeleteStation(id);
+            if (result.Success)
+            {
+                return Ok(result.Message);
+            }
+            else
+            {
+                return BadRequest(result.Message);
+            }
+
         }
 
-        // DELETE api/<StationController>/5
-        [HttpDelete("{id}")]
-        public void Delete(int id)
+        [HttpDelete("harddeletestation/{id}")]
+        public IActionResult HardDeleteStation(int id)
         {
+            var result = _stationService.HardDeleteStation(id);
+            if (result.Success)
+            {
+                return Ok(result.Message);
+            }
+            else
+            {
+                return BadRequest(result.Message);
+            }
         }
     }
 }
