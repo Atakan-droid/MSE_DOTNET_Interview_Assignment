@@ -25,12 +25,29 @@ namespace Business.Concrete
 
         public Result<ProductionLine> AddProductionLine(ProductionLine productionLine)
         {
-            throw new NotImplementedException();
+            bool IsLineExist = _productionLineDal.Any(u => u.LineName == productionLine.LineName);
+            if (IsLineExist) { return new Result<ProductionLine>(false, Messages.LineAlreadyExist); }
+            else
+            {
+                _productionLineDal.Add(productionLine);
+                return new Result<ProductionLine>(true, Messages.LineAdded);
+            }
         }
 
         public Result<ProductionLine> DeleteProductionLine(int productionLineId)
         {
-            throw new NotImplementedException();
+            var IsLineExist = _productionLineDal.Get(u => u.Id == productionLineId);
+            if (IsLineExist != null)
+            {
+                IsLineExist.IsDeleted = true;
+                IsLineExist.ModifiedDate = DateTime.Now;
+                _productionLineDal.Update(IsLineExist);
+                return new Result<ProductionLine>(true, Messages.LineDeleted);
+            }
+            else
+            {
+                return new Result<ProductionLine>(false, Messages.ProductionLineNotFound);
+            }
         }
 
         public Result<ProductionLine> GetProductionLineById(int productionLineId)
@@ -49,7 +66,7 @@ namespace Business.Concrete
         {
             var IsUserExist = _userService.GetUserById(userId);
             if (!IsUserExist.Success) { return new Result<List<ProductionLine>>(false, IsUserExist.Message); }
-            var result = _productionLineDal.GetAll(u => u.Id == userId);
+            var result = _productionLineDal.GetAllLinesRelatedToUser(userId);
             if (result != null)
             {
                 return new Result<List<ProductionLine>>(result, true, Messages.ProductionLinesGot);
@@ -64,12 +81,34 @@ namespace Business.Concrete
 
         public Result<ProductionLine> HardDeleteProductionLine(int productionLineId)
         {
-            throw new NotImplementedException();
+            var IsLineExist = _productionLineDal.Get(u => u.Id == productionLineId);
+            if (IsLineExist != null)
+            {
+               
+                _productionLineDal.Delete(IsLineExist);
+                return new Result<ProductionLine>(true, Messages.LineDeleted);
+            }
+            else
+            {
+                return new Result<ProductionLine>(false, Messages.ProductionLineNotFound);
+            }
         }
 
         public Result<ProductionLine> UpdateProductionLine(int productionLineId, ProductionLine productionLine)
         {
-            throw new NotImplementedException();
+            var IsLineExist = _productionLineDal.Get(u => u.Id == productionLineId);
+            if (IsLineExist != null)
+            {
+                IsLineExist.LineName = productionLine.LineName;
+                IsLineExist.Stations = productionLine.Stations;
+                IsLineExist.ModifiedDate = DateTime.Now;
+                _productionLineDal.Update(IsLineExist);
+                return new Result<ProductionLine>(true, Messages.LineUpdated);
+            }
+            else
+            {
+                return new Result<ProductionLine>(false, Messages.ProductionLineNotFound);
+            }
         }
     }
 }

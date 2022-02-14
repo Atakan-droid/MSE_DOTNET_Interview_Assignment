@@ -21,12 +21,29 @@ namespace Business.Concrete
 
         public Result<User> AddUser(User user)
         {
-            throw new NotImplementedException();
+            bool IsUserExist = _userDal.Any(u => u.Mail == user.Mail);
+            if (IsUserExist) { return new Result<User>(false, Messages.UserAlreadyExist); }
+            else
+            {
+                _userDal.Add(user);
+                return new Result<User>(true, Messages.UserAdded);
+            }
         }
 
         public Result<User> DeleteUser(int userId)
         {
-            throw new NotImplementedException();
+            var IsUserExist = _userDal.Get(u => u.Id == userId);
+            if (IsUserExist != null)
+            {
+                IsUserExist.IsDeleted = true;
+                IsUserExist.ModifiedDate = DateTime.Now;
+                _userDal.Update(IsUserExist);
+                return new Result<User>(true, Messages.UserDeleted);
+            }
+            else
+            {
+                return new Result<User>(false, Messages.UserNotFound);
+            }
         }
 
         public Result<User> GetUserById(int userId)
@@ -46,17 +63,50 @@ namespace Business.Concrete
 
         public Result<List<User>> GetUsersByRole(int roleId)
         {
-            throw new NotImplementedException();
+            var IsRoleExist = _userDal.GetAll(u => u.RoleID == roleId);
+            if (IsRoleExist != null)
+            {
+               
+                return new Result<List<User>>(IsRoleExist,true, Messages.UsersGot);
+            }
+            else
+            {
+                return new Result<List<User>>(false, Messages.RoleNotFound);
+            }
         }
 
         public Result<User> HardDeleteUser(int userId)
         {
-            throw new NotImplementedException();
+            var IsUserExist = _userDal.Get(u => u.Id == userId);
+            if (IsUserExist != null)
+            {
+                
+                _userDal.Delete(IsUserExist);
+                return new Result<User>(true, Messages.UserDeleted);
+            }
+            else
+            {
+                return new Result<User>(false, Messages.UserNotFound);
+            }
         }
 
         public Result<User> UpdateUser(int userId, User user)
         {
-            throw new NotImplementedException();
+            var IsUserExist = _userDal.Get(u => u.Id == userId);
+            if (IsUserExist != null)
+            {
+                IsUserExist.Mail = user.Mail;
+                IsUserExist.Name = user.Name;
+                IsUserExist.Password = user.Password;
+                IsUserExist.Surname = user.Surname;
+                IsUserExist.ModifiedDate = DateTime.Now;
+                _userDal.Update(IsUserExist);
+                return new Result<User>(true, Messages.UserUpdated);
+            }
+            else
+            {
+                return new Result<User>(false, Messages.UserNotFound);
+            }
         }
 
      

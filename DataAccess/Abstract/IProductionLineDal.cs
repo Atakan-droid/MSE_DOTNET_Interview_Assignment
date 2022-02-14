@@ -10,5 +10,6 @@ namespace DataAccess.Abstract
 {
     public interface IProductionLineDal: IEfRepository<ProductionLine>
     {
+        List<ProductionLine> GetAllLinesRelatedToUser(int userId);
     }
 }
