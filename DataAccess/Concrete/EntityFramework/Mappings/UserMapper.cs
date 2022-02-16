@@ -30,7 +30,29 @@ namespace DataAccess.Concrete.EntityFramework.Mappings
                 RoleID = 1,
 
             };
-            builder.HasData(initialAdmin);
+            var initialMaintenanceStaff= new User
+            {
+                Id = 2,
+                Name = "Atakan",
+                Surname = "Göçer",
+                Mail = "atakangocer98@gmail.com",
+                Password = "123456",
+                RoleID = 2,
+                
+
+            };
+            var initialUser = new User
+            {
+                Id = 3,
+                Name = "User",
+                Surname = "UserSurname",
+                Mail = "mock@gmail.com",
+                Password = "123456",
+                RoleID =3,
+
+
+            };
+            builder.HasData(initialAdmin,initialMaintenanceStaff,initialUser);
         }
     }
 }

@@ -11,6 +11,7 @@ namespace Business.Utilities.ResultType
         public string Message { get; }
         public T Data { get; }
         public bool Success { get; }
+        public List<string> ListData { get; set; }
         public Result(T data, bool success, string message)
         {
             Data = data;
@@ -21,6 +22,12 @@ namespace Business.Utilities.ResultType
         {
             Success = success;
             Message = message;
+        }
+        public Result(List<string> data,bool success, string message)
+        {
+            Success = success;
+            Message = message;
+            ListData = data;
         }
 
     }

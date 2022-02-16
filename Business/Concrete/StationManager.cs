@@ -1,4 +1,5 @@
 ﻿using Business.Abstract;
+using Business.Utilities.MailKit;
 using Business.Utilities.Messages;
 using Business.Utilities.ResultType;
 using DataAccess.Abstract;
@@ -16,20 +17,47 @@ namespace Business.Concrete
         private readonly IStationDal _stationDal;
         private readonly IProductionLineService _productionLineService;
         private readonly IUserService _userService;
-        public StationManager(IStationDal stationDal, IProductionLineService productionLineService, IUserService userService)
+        private readonly IAlarmService _alarmService;
+        private readonly IMailService _mailService;
+        public StationManager(IStationDal stationDal, 
+            IProductionLineService productionLineService, 
+            IUserService userService, 
+            IAlarmService alarmService,
+            IMailService mailService)
         {
             _stationDal = stationDal;
             _productionLineService = productionLineService;
             _userService = userService;
+            _alarmService = alarmService;
+            _mailService = mailService;
         }
 
         public Result<Station> AddStation(Station station)
         {
             bool IsStationExist = _stationDal.Any(u => u.StationName == station.StationName);
+            var IsUserExist = _userService.GetUserById(station.MaintenanceStaffId);
+            if (!IsUserExist.Success) { return new Result<Station>(false,Messages.UserNotFound); }
             if (IsStationExist) { return new Result<Station>(false, Messages.StationExist); }
             else
             {
                 _stationDal.Add(station);
+                var checkValues = _alarmService.CheckValuesOfStation(station);
+                if (!checkValues.Success) {
+                    MailModel mailModel = new MailModel();
+                    mailModel.ToEmail = IsUserExist.Data.Mail;
+                    mailModel.Subject = station.StationName + " Sorun!!!";
+                    var result = String.Join(", ", checkValues.ListData);
+                    mailModel.Body = result;
+                    bool isMailSuccesfullySent=_mailService.SendEmail(mailModel);
+                    if (isMailSuccesfullySent)
+                    {
+                        return new Result<Station>(false,Messages.MailSent);
+                    }
+                    else
+                    {
+                        return new Result<Station>(false,Messages.MailNotSent);
+                    }
+                }
                 return new Result<Station>(true, Messages.StationAdded);
             }
         }
@@ -113,7 +141,7 @@ namespace Business.Concrete
                 if (!isUserExist.Success) { return new Result<Station>(false,Messages.UserNotFound); }
                 var isLineExist = _productionLineService.GetProductionLineById(station.LineId);
                 if (!isLineExist.Success) { return new Result<Station>(false, Messages.ProductionLineNotFound); }
-                IsStationExist.Heat = station.Heat;
+                IsStationExist.Temperature = station.Temperature;
                 IsStationExist.Pressure = station.Pressure;
                 IsStationExist.StationName = station.StationName;
                 IsStationExist.Status = station.Status;
@@ -123,6 +151,23 @@ namespace Business.Concrete
                 IsStationExist.MaintenanceStaff = isUserExist.Data;
                 IsStationExist.ModifiedDate = DateTime.Now;
                 _stationDal.Update(IsStationExist);
+                var checkValues = _alarmService.CheckValuesOfStation(station);
+                if (!checkValues.Success)
+                {
+                    MailModel mailModel = new MailModel();
+                    mailModel.ToEmail = isUserExist.Data.Mail;
+                    mailModel.Subject = station.StationName + " Sorun!!!";
+                    mailModel.Body = checkValues.ListData.ToString();
+                    bool isMailSuccesfullySent = _mailService.SendEmail(mailModel);
+                    if (isMailSuccesfullySent)
+                    {
+                        return new Result<Station>(false, Messages.MailSent);
+                    }
+                    else
+                    {
+                        return new Result<Station>(false, Messages.MailNotSent);
+                    }
+                }
                 return new Result<Station>(true, Messages.StationUpdated);
             }
             else

@@ -1,5 +1,6 @@
 using Business.Abstract;
 using Business.Concrete;
+using Business.Utilities.MailKit;
 using DataAccess.Abstract;
 using DataAccess.Concrete.EntityFramework.Repositories;
 using Microsoft.AspNetCore.Builder;
@@ -28,6 +29,7 @@ namespace WebAPI
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.Configure<MailSettings>(Configuration.GetSection("MailSettings"));
             services.AddSingleton<IRoleService, RoleManager>();
             services.AddSingleton<IRoleDal,RoleDal>();
 
@@ -39,6 +41,9 @@ namespace WebAPI
 
             services.AddSingleton<IStationDal, StationDal>();
             services.AddSingleton<IStationService, StationManager>();
+
+            services.AddSingleton<IAlarmService, AlarmManager>();
+            services.AddSingleton<IMailService, MailManager>();
 
             services.AddCors(o => o.AddPolicy("MyPolicy", builder =>
             {

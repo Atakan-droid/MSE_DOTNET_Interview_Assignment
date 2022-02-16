@@ -4,14 +4,16 @@ using DataAccess.Concrete.EntityFramework.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace DataAccess.Migrations
 {
     [DbContext(typeof(EfMSE_DOTNET_Context))]
-    partial class EfMSE_DOTNET_ContextModelSnapshot : ModelSnapshot
+    [Migration("20220216115942_Initial-DB-Data")]
+    partial class InitialDBData
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -50,37 +52,37 @@ namespace DataAccess.Migrations
                         new
                         {
                             Id = 1,
-                            CreatedDate = new DateTime(2022, 2, 16, 16, 7, 5, 840, DateTimeKind.Local).AddTicks(5086),
+                            CreatedDate = new DateTime(2022, 2, 16, 14, 59, 41, 430, DateTimeKind.Local).AddTicks(628),
                             IsDeleted = false,
                             LineName = "A Üretim Yolu",
-                            ModifiedDate = new DateTime(2022, 2, 16, 16, 7, 5, 840, DateTimeKind.Local).AddTicks(5093),
+                            ModifiedDate = new DateTime(2022, 2, 16, 14, 59, 41, 430, DateTimeKind.Local).AddTicks(635),
                             isActive = false
                         },
                         new
                         {
                             Id = 2,
-                            CreatedDate = new DateTime(2022, 2, 16, 16, 7, 5, 840, DateTimeKind.Local).AddTicks(5484),
+                            CreatedDate = new DateTime(2022, 2, 16, 14, 59, 41, 430, DateTimeKind.Local).AddTicks(1005),
                             IsDeleted = false,
                             LineName = "B Üretim Yolu",
-                            ModifiedDate = new DateTime(2022, 2, 16, 16, 7, 5, 840, DateTimeKind.Local).AddTicks(5488),
+                            ModifiedDate = new DateTime(2022, 2, 16, 14, 59, 41, 430, DateTimeKind.Local).AddTicks(1009),
                             isActive = false
                         },
                         new
                         {
                             Id = 3,
-                            CreatedDate = new DateTime(2022, 2, 16, 16, 7, 5, 840, DateTimeKind.Local).AddTicks(5490),
+                            CreatedDate = new DateTime(2022, 2, 16, 14, 59, 41, 430, DateTimeKind.Local).AddTicks(1011),
                             IsDeleted = false,
                             LineName = "C Üretim Yolu",
-                            ModifiedDate = new DateTime(2022, 2, 16, 16, 7, 5, 840, DateTimeKind.Local).AddTicks(5491),
+                            ModifiedDate = new DateTime(2022, 2, 16, 14, 59, 41, 430, DateTimeKind.Local).AddTicks(1012),
                             isActive = false
                         },
                         new
                         {
                             Id = 4,
-                            CreatedDate = new DateTime(2022, 2, 16, 16, 7, 5, 840, DateTimeKind.Local).AddTicks(5493),
+                            CreatedDate = new DateTime(2022, 2, 16, 14, 59, 41, 430, DateTimeKind.Local).AddTicks(1013),
                             IsDeleted = false,
                             LineName = "D Üretim Yolu",
-                            ModifiedDate = new DateTime(2022, 2, 16, 16, 7, 5, 840, DateTimeKind.Local).AddTicks(5494),
+                            ModifiedDate = new DateTime(2022, 2, 16, 14, 59, 41, 430, DateTimeKind.Local).AddTicks(1014),
                             isActive = false
                         });
                 });
@@ -116,27 +118,27 @@ namespace DataAccess.Migrations
                         new
                         {
                             Id = 1,
-                            CreatedDate = new DateTime(2022, 2, 16, 16, 7, 5, 830, DateTimeKind.Local).AddTicks(260),
+                            CreatedDate = new DateTime(2022, 2, 16, 14, 59, 41, 419, DateTimeKind.Local).AddTicks(3675),
                             IsDeleted = false,
-                            ModifiedDate = new DateTime(2022, 2, 16, 16, 7, 5, 831, DateTimeKind.Local).AddTicks(988),
+                            ModifiedDate = new DateTime(2022, 2, 16, 14, 59, 41, 420, DateTimeKind.Local).AddTicks(7182),
                             RoleName = "Admin",
                             isActive = false
                         },
                         new
                         {
                             Id = 2,
-                            CreatedDate = new DateTime(2022, 2, 16, 16, 7, 5, 831, DateTimeKind.Local).AddTicks(2516),
+                            CreatedDate = new DateTime(2022, 2, 16, 14, 59, 41, 420, DateTimeKind.Local).AddTicks(8190),
                             IsDeleted = false,
-                            ModifiedDate = new DateTime(2022, 2, 16, 16, 7, 5, 831, DateTimeKind.Local).AddTicks(2523),
+                            ModifiedDate = new DateTime(2022, 2, 16, 14, 59, 41, 420, DateTimeKind.Local).AddTicks(8196),
                             RoleName = "Bakım Personeli",
                             isActive = false
                         },
                         new
                         {
                             Id = 3,
-                            CreatedDate = new DateTime(2022, 2, 16, 16, 7, 5, 831, DateTimeKind.Local).AddTicks(2526),
+                            CreatedDate = new DateTime(2022, 2, 16, 14, 59, 41, 420, DateTimeKind.Local).AddTicks(8198),
                             IsDeleted = false,
-                            ModifiedDate = new DateTime(2022, 2, 16, 16, 7, 5, 831, DateTimeKind.Local).AddTicks(2527),
+                            ModifiedDate = new DateTime(2022, 2, 16, 14, 59, 41, 420, DateTimeKind.Local).AddTicks(8199),
                             RoleName = "Kullanıcı",
                             isActive = false
                         });
@@ -151,6 +153,9 @@ namespace DataAccess.Migrations
 
                     b.Property<DateTime>("CreatedDate")
                         .HasColumnType("datetime2");
+
+                    b.Property<decimal>("Heat")
+                        .HasColumnType("decimal(18,2)");
 
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("bit");
@@ -192,11 +197,12 @@ namespace DataAccess.Migrations
                         new
                         {
                             Id = 1,
-                            CreatedDate = new DateTime(2022, 2, 16, 16, 7, 5, 839, DateTimeKind.Local).AddTicks(3426),
+                            CreatedDate = new DateTime(2022, 2, 16, 14, 59, 41, 428, DateTimeKind.Local).AddTicks(9205),
+                            Heat = 70m,
                             IsDeleted = false,
                             LineId = 1,
                             MaintenanceStaffId = 2,
-                            ModifiedDate = new DateTime(2022, 2, 16, 16, 7, 5, 839, DateTimeKind.Local).AddTicks(3446),
+                            ModifiedDate = new DateTime(2022, 2, 16, 14, 59, 41, 428, DateTimeKind.Local).AddTicks(9224),
                             Pressure = 108m,
                             StationName = "Birinci istasyon",
                             Status = "Çalışıyor",
@@ -206,11 +212,12 @@ namespace DataAccess.Migrations
                         new
                         {
                             Id = 2,
-                            CreatedDate = new DateTime(2022, 2, 16, 16, 7, 5, 839, DateTimeKind.Local).AddTicks(5539),
+                            CreatedDate = new DateTime(2022, 2, 16, 14, 59, 41, 429, DateTimeKind.Local).AddTicks(1294),
+                            Heat = 50m,
                             IsDeleted = false,
                             LineId = 3,
                             MaintenanceStaffId = 3,
-                            ModifiedDate = new DateTime(2022, 2, 16, 16, 7, 5, 839, DateTimeKind.Local).AddTicks(5544),
+                            ModifiedDate = new DateTime(2022, 2, 16, 14, 59, 41, 429, DateTimeKind.Local).AddTicks(1300),
                             Pressure = 8m,
                             StationName = "Ikinci istasyon",
                             Status = "Çalışıyor",
@@ -220,11 +227,12 @@ namespace DataAccess.Migrations
                         new
                         {
                             Id = 3,
-                            CreatedDate = new DateTime(2022, 2, 16, 16, 7, 5, 839, DateTimeKind.Local).AddTicks(5549),
+                            CreatedDate = new DateTime(2022, 2, 16, 14, 59, 41, 429, DateTimeKind.Local).AddTicks(1305),
+                            Heat = 75m,
                             IsDeleted = false,
                             LineId = 2,
                             MaintenanceStaffId = 2,
-                            ModifiedDate = new DateTime(2022, 2, 16, 16, 7, 5, 839, DateTimeKind.Local).AddTicks(5550),
+                            ModifiedDate = new DateTime(2022, 2, 16, 14, 59, 41, 429, DateTimeKind.Local).AddTicks(1306),
                             Pressure = 158m,
                             StationName = "Ücüncü istasyon",
                             Status = "Çalışıyor",
@@ -281,10 +289,10 @@ namespace DataAccess.Migrations
                         new
                         {
                             Id = 1,
-                            CreatedDate = new DateTime(2022, 2, 16, 16, 7, 5, 841, DateTimeKind.Local).AddTicks(6150),
+                            CreatedDate = new DateTime(2022, 2, 16, 14, 59, 41, 431, DateTimeKind.Local).AddTicks(1117),
                             IsDeleted = false,
                             Mail = "adminuser@gmail.com",
-                            ModifiedDate = new DateTime(2022, 2, 16, 16, 7, 5, 841, DateTimeKind.Local).AddTicks(6158),
+                            ModifiedDate = new DateTime(2022, 2, 16, 14, 59, 41, 431, DateTimeKind.Local).AddTicks(1124),
                             Name = "adminuser",
                             Password = "Ab123456789",
                             RoleID = 1,
@@ -294,10 +302,10 @@ namespace DataAccess.Migrations
                         new
                         {
                             Id = 2,
-                            CreatedDate = new DateTime(2022, 2, 16, 16, 7, 5, 841, DateTimeKind.Local).AddTicks(7802),
+                            CreatedDate = new DateTime(2022, 2, 16, 14, 59, 41, 431, DateTimeKind.Local).AddTicks(2522),
                             IsDeleted = false,
                             Mail = "atakangocer98@gmail.com",
-                            ModifiedDate = new DateTime(2022, 2, 16, 16, 7, 5, 841, DateTimeKind.Local).AddTicks(7807),
+                            ModifiedDate = new DateTime(2022, 2, 16, 14, 59, 41, 431, DateTimeKind.Local).AddTicks(2526),
                             Name = "Atakan",
                             Password = "123456",
                             RoleID = 2,
@@ -307,10 +315,10 @@ namespace DataAccess.Migrations
                         new
                         {
                             Id = 3,
-                            CreatedDate = new DateTime(2022, 2, 16, 16, 7, 5, 841, DateTimeKind.Local).AddTicks(7811),
+                            CreatedDate = new DateTime(2022, 2, 16, 14, 59, 41, 431, DateTimeKind.Local).AddTicks(2529),
                             IsDeleted = false,
                             Mail = "mock@gmail.com",
-                            ModifiedDate = new DateTime(2022, 2, 16, 16, 7, 5, 841, DateTimeKind.Local).AddTicks(7812),
+                            ModifiedDate = new DateTime(2022, 2, 16, 14, 59, 41, 431, DateTimeKind.Local).AddTicks(2530),
                             Name = "User",
                             Password = "123456",
                             RoleID = 3,

@@ -40,5 +40,12 @@ namespace Business.Utilities.Messages
         public static string StationAdded = "İstasyon Eklendi";
         public static string StationDeleted = "İstasyon Silindi";
         public static string StationUpdated = "İstasyon Güncellendi";
+
+        public static string TempratureLow = "Isı düşük";
+        public static string TempratureHigh = "Isı Yüksek";
+        public static string PressureLow = "Basınç düşük";
+        public static string PressureHigh ="Basınç Yüksek";
+        public static string MailSent = "Mail Yollandı";
+        public static string MailNotSent = "Mail Gönderilemedi";
     }
 }
