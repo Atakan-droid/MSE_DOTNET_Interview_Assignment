@@ -45,6 +45,7 @@ namespace WebAPI
             services.AddSingleton<IAlarmService, AlarmManager>();
             services.AddSingleton<IMailService, MailManager>();
 
+            
             services.AddCors(o => o.AddPolicy("MyPolicy", builder =>
             {
                 builder.AllowAnyOrigin()
@@ -53,6 +54,7 @@ namespace WebAPI
             }));
             
             services.AddControllers();
+            services.AddLogging();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
