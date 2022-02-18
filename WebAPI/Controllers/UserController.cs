@@ -92,7 +92,7 @@ namespace WebAPI.Controllers
             }
 
         }
-        [HttpPatch("deleteuser/{id}")]
+        [HttpGet("deleteuser/{id}")]
         public IActionResult DeleteUser(int id)
         {
             var result = _userService.DeleteUser(id);

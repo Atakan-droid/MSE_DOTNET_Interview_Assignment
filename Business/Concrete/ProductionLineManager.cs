@@ -76,7 +76,7 @@ namespace Business.Concrete
 
         public Result<List<ProductionLine>> GetProductionLines()
         {
-            return new Result<List<ProductionLine>>(_productionLineDal.GetAll(),true,Messages.ProductionLinesGot);
+            return new Result<List<ProductionLine>>(_productionLineDal.GetAll(u => u.IsDeleted == false),true,Messages.ProductionLinesGot);
         }
 
         public Result<ProductionLine> HardDeleteProductionLine(int productionLineId)

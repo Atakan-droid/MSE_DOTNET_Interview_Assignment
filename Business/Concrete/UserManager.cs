@@ -58,7 +58,7 @@ namespace Business.Concrete
 
         public Result<List<User>> GetUsers()
         {
-            return new Result<List<User>>(_userDal.GetAll(),true,Messages.UsersGot);
+            return new Result<List<User>>(_userDal.GetAll(u=>u.IsDeleted==false),true,Messages.UsersGot);
         }
 
         public Result<List<User>> GetUsersByRole(int roleId)

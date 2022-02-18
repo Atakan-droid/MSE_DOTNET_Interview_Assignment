@@ -114,7 +114,7 @@ namespace Business.Concrete
 
         public Result<List<Station>> GetStations()
         {
-            return new Result<List<Station>>(_stationDal.GetAll(),true,Messages.StationGot);
+            return new Result<List<Station>>(_stationDal.GetAll(u => u.IsDeleted == false),true,Messages.StationGot);
         }
 
         public Result<Station> HardDeleteStation(int stationId)
