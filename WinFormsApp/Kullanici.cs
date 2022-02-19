@@ -60,9 +60,6 @@ namespace WinFormsApp
                 dataGridView1.Rows[i].Cells[4].Value = users[i].CreatedDate;
                 dataGridView1.Rows[i].Cells[5].Value = users[i].ModifiedDate;
             }
-            
-
-
         }
         private async void getbyid_Click(object sender, EventArgs e)
         {
@@ -88,7 +85,7 @@ namespace WinFormsApp
 
         private void update_Click(object sender, EventArgs e)
         {
-            if (update.Text == "") { MessageBox.Show("Id Alanı Boş bırakılamaz"); }
+            if (updateUserId.Text == "") { MessageBox.Show("Id Alanı Boş bırakılamaz"); }
             SetValueForUser = updateUserId.Text;
             KullaniciGuncelle kullaniciGuncelle = new KullaniciGuncelle();
             kullaniciGuncelle.ShowDialog();
@@ -111,6 +108,11 @@ namespace WinFormsApp
 
                 }
             }
+
+        }
+
+        private void Kullanici_Load(object sender, EventArgs e)
+        {
 
         }
     }

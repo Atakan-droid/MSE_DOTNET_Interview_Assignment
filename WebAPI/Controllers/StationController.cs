@@ -105,7 +105,7 @@ namespace WebAPI.Controllers
             }
 
         }
-        [HttpPatch("deletestation/{id}")]
+        [HttpGet("deletestation/{id}")]
         public IActionResult DeleteStation(int id)
         {
             var result = _stationService.DeleteStation(id);

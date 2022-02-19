@@ -51,7 +51,19 @@ namespace WebAPI.Controllers
                 return NotFound(result.Message);
             }
         }
-
+        [HttpGet("getproductionLinebyid/{Id}")]
+        public IActionResult GetProductionLineById(int Id)
+        {
+            var result = _productionLineService.GetProductionLineById(Id);
+            if (result.Success)
+            {
+                return Ok(result.Data);
+            }
+            else
+            {
+                return NotFound(result.Message);
+            }
+        }
 
         [HttpPost("addproductionLine")]
         public IActionResult AddProductionLine(ProductionLine productionLine)
@@ -82,7 +94,7 @@ namespace WebAPI.Controllers
             }
 
         }
-        [HttpPatch("deleteproductionLine/{id}")]
+        [HttpGet("deleteproductionLine/{id}")]
         public IActionResult DeleteProductionLine(int id)
         {
             var result = _productionLineService.DeleteProductionLine(id);

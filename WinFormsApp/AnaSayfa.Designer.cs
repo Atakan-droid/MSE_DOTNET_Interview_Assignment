@@ -52,6 +52,7 @@ namespace WinFormsApp
             this.IstasyonIslemleri.TabIndex = 1;
             this.IstasyonIslemleri.Text = "İstasyon İşlemleri";
             this.IstasyonIslemleri.UseVisualStyleBackColor = true;
+            this.IstasyonIslemleri.Click += new System.EventHandler(this.IstasyonIslemleri_Click);
             // 
             // UretimYolu
             // 
@@ -61,6 +62,7 @@ namespace WinFormsApp
             this.UretimYolu.TabIndex = 2;
             this.UretimYolu.Text = "Üretim Yolu İşlemleri";
             this.UretimYolu.UseVisualStyleBackColor = true;
+            this.UretimYolu.Click += new System.EventHandler(this.UretimYolu_Click);
             // 
             // AnaSayfa
             // 

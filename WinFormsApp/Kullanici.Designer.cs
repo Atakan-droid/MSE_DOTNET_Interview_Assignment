@@ -105,10 +105,10 @@ namespace WinFormsApp
             // dataGridView1
             // 
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Location = new System.Drawing.Point(20, 197);
+            this.dataGridView1.Location = new System.Drawing.Point(29, 179);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.RowTemplate.Height = 25;
-            this.dataGridView1.Size = new System.Drawing.Size(768, 215);
+            this.dataGridView1.Size = new System.Drawing.Size(866, 245);
             this.dataGridView1.TabIndex = 6;
             // 
             // id_text
@@ -152,6 +152,7 @@ namespace WinFormsApp
             this.Controls.Add(this.geridon);
             this.Name = "Kullanici";
             this.Text = "Kullanici İşlemleri";
+            this.Load += new System.EventHandler(this.Kullanici_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();

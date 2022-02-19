@@ -32,19 +32,23 @@ namespace WinFormsApp
 
         private async void add_Click(object sender, EventArgs e)
         {
-            User user = new User();
-            user.Mail = textBox1.Text;
-            user.Password = textBox2.Text;
-            user.Name = textBox3.Text;
-            user.Surname = textBox4.Text;
-            user.RoleID = 2;
-            
+       
             if(textBox1.Text=="" || textBox2.Text == "" || textBox3.Text == "" || textBox4.Text == "")
             {
                 MessageBox.Show("Boş Bırakılamaz");
             }
-            var response = await client.PostAsJsonAsync("adduser", user);
-            MessageBox.Show(response.Content.ReadAsStringAsync().Result);
+            else
+            {
+                User user = new User();
+                user.Mail = textBox1.Text;
+                user.Password = textBox2.Text;
+                user.Name = textBox3.Text;
+                user.Surname = textBox4.Text;
+                user.RoleID = 2;
+                var response = await client.PostAsJsonAsync("adduser", user);
+                MessageBox.Show(response.Content.ReadAsStringAsync().Result);
+            }
+           
         }
     }
 }

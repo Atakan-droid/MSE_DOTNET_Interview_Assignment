@@ -28,5 +28,19 @@ namespace WinFormsApp
             this.Hide();
             user.ShowDialog();
         }
+
+        private void IstasyonIslemleri_Click(object sender, EventArgs e)
+        {
+            Istasyon istasyon = new Istasyon();
+            this.Hide();
+            istasyon.ShowDialog();
+        }
+
+        private void UretimYolu_Click(object sender, EventArgs e)
+        {
+            UretimYolu uretimYolu = new UretimYolu();
+            this.Hide();
+            uretimYolu.ShowDialog();
+        }
     }
 }
