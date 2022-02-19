@@ -15,6 +15,7 @@ namespace Business.Abstract
         Result<Station> DeleteStation(int stationId);
         Result<Station> HardDeleteStation(int stationId);
         Result<List<Station>> GetStationByProductionLine(int productionLineId);
+        Result<List<Station>> GetStationByProductionLineName(string productionLineName);
         Result<List<Station>> GetStationByUser(int userId);
         Result<List<Station>> GetStations();
         Result<Station> GetStationById(int stationId);

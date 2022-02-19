@@ -31,13 +31,18 @@ namespace WinFormsApp
             dataGridView1.Columns[2].Name = "Basınç";
             dataGridView1.Columns[3].Name = "Isı";
             dataGridView1.Columns[4].Name = "Durum";
-            dataGridView1.Columns[5].Name = "Üretim Yolu Id";
+            dataGridView1.Columns[5].Name = "Üretim Yol Id";
             dataGridView1.Columns[6].Name = "Bakım Çalışanı Id";
         }
 
-        private void Istasyon_Load(object sender, EventArgs e)
+        private async void Istasyon_Load(object sender, EventArgs e)
         {
+            List<ProductionLine> lines = await client.GetFromJsonAsync<List<ProductionLine>>("http://localhost:4296/api/productionline/getproductionLines");
 
+            for (int i = 0; i < lines.Count; i++)
+            {
+                comboBox1.Items.Add(lines[i].Id+"-"+lines[i].LineName);
+            }
         }
 
         private void geridon_Click(object sender, EventArgs e)
@@ -113,6 +118,25 @@ namespace WinFormsApp
             SetValueForStation = updateId.Text;
             IstasyonGuncelle istasyonGuncelle = new IstasyonGuncelle();
             istasyonGuncelle.ShowDialog();
+        }
+
+        private async void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            var lineId=comboBox1.Text.Split("-");
+            this.dataGridView1.Rows.Clear();
+            List<Station> stations = await client.GetFromJsonAsync<List<Station>>($"getstationsbyproductionline/{lineId[0]}");
+
+            for (int i = 0; i < stations.Count; i++)
+            {
+                i = dataGridView1.Rows.Add();
+                dataGridView1.Rows[i].Cells[0].Value = stations[i].Id;
+                dataGridView1.Rows[i].Cells[1].Value = stations[i].StationName;
+                dataGridView1.Rows[i].Cells[2].Value = stations[i].Pressure;
+                dataGridView1.Rows[i].Cells[3].Value = stations[i].Temperature;
+                dataGridView1.Rows[i].Cells[4].Value = stations[i].Status;
+                dataGridView1.Rows[i].Cells[5].Value = stations[i].LineId;
+                dataGridView1.Rows[i].Cells[6].Value = stations[i].MaintenanceStaffId;
+            }
         }
     }
 }

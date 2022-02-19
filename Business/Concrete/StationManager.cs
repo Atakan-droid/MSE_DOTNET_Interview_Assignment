@@ -99,6 +99,15 @@ namespace Business.Concrete
             }
             return new Result<List<Station>>(false, Messages.StationNotFound);
         }
+        public Result<List<Station>> GetStationByProductionLineName(string productionLineName)
+        {    
+            var result = _stationDal.GetAll(u => u.ProductionLine.LineName == productionLineName);
+            if (result != null)
+            {
+                return new Result<List<Station>>(result, true, Messages.StationGot);
+            }
+            return new Result<List<Station>>(false, Messages.StationNotFound);
+        }
 
         public Result<List<Station>> GetStationByUser(int userId)
         {

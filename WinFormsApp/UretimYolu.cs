@@ -94,5 +94,17 @@ namespace WinFormsApp
             this.Hide();
             anaSayfa.ShowDialog();
         }
+
+        private void label1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+     
+
+        private async void UretimYolu_Load(object sender, EventArgs e)
+        { 
+          
+        }
     }
 }

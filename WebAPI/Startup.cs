@@ -53,7 +53,6 @@ namespace WebAPI
                        .AllowAnyMethod()
                        .AllowAnyHeader();
             }));
-
             services.AddControllers();
             services.AddLogging();
         }

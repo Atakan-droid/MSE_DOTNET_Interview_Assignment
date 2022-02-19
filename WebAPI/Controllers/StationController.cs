@@ -61,6 +61,19 @@ namespace WebAPI.Controllers
                 return NotFound(result.Message);
             }
         }
+        [HttpGet("getstationsbyproductionlinename/{line}")]
+        public IActionResult GetStationByProductionLineNamee(string line)
+        {
+            var result = _stationService.GetStationByProductionLineName(line);
+            if (result.Success)
+            {
+                return Ok(result.Data);
+            }
+            else
+            {
+                return NotFound(result.Message);
+            }
+        }
         [HttpGet("getstationsbyuser/{userId}")]
         public IActionResult GetStationByUser(int userId)
         {

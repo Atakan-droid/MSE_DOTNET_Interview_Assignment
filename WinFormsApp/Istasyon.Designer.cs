@@ -39,16 +39,18 @@ namespace WinFormsApp
             this.getbyidText = new System.Windows.Forms.TextBox();
             this.updateId = new System.Windows.Forms.TextBox();
             this.deleteId = new System.Windows.Forms.TextBox();
+            this.comboBox1 = new System.Windows.Forms.ComboBox();
+            this.label1 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
             // dataGridView1
             // 
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Location = new System.Drawing.Point(31, 183);
+            this.dataGridView1.Location = new System.Drawing.Point(189, 186);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.RowTemplate.Height = 25;
-            this.dataGridView1.Size = new System.Drawing.Size(736, 255);
+            this.dataGridView1.Size = new System.Drawing.Size(578, 252);
             this.dataGridView1.TabIndex = 0;
             // 
             // geridon
@@ -135,11 +137,31 @@ namespace WinFormsApp
             this.deleteId.Size = new System.Drawing.Size(134, 23);
             this.deleteId.TabIndex = 9;
             // 
+            // comboBox1
+            // 
+            this.comboBox1.FormattingEnabled = true;
+            this.comboBox1.Location = new System.Drawing.Point(31, 266);
+            this.comboBox1.Name = "comboBox1";
+            this.comboBox1.Size = new System.Drawing.Size(134, 23);
+            this.comboBox1.TabIndex = 10;
+            this.comboBox1.SelectedIndexChanged += new System.EventHandler(this.comboBox1_SelectedIndexChanged);
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(31, 238);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(138, 15);
+            this.label1.TabIndex = 11;
+            this.label1.Text = "Üretim Yoluna Göre Getir";
+            // 
             // Istasyon
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.label1);
+            this.Controls.Add(this.comboBox1);
             this.Controls.Add(this.deleteId);
             this.Controls.Add(this.updateId);
             this.Controls.Add(this.getbyidText);
@@ -171,5 +193,7 @@ namespace WinFormsApp
         private System.Windows.Forms.TextBox getbyidText;
         private System.Windows.Forms.TextBox updateId;
         private System.Windows.Forms.TextBox deleteId;
+        private System.Windows.Forms.ComboBox comboBox1;
+        private System.Windows.Forms.Label label1;
     }
 }
