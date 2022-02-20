@@ -41,6 +41,7 @@ namespace WinFormsApp
             this.deleteId = new System.Windows.Forms.TextBox();
             this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.label1 = new System.Windows.Forms.Label();
+            this.maintenanceStaff = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -155,11 +156,22 @@ namespace WinFormsApp
             this.label1.TabIndex = 11;
             this.label1.Text = "Üretim Yoluna Göre Getir";
             // 
+            // maintenanceStaff
+            // 
+            this.maintenanceStaff.Location = new System.Drawing.Point(31, 347);
+            this.maintenanceStaff.Name = "maintenanceStaff";
+            this.maintenanceStaff.Size = new System.Drawing.Size(138, 54);
+            this.maintenanceStaff.TabIndex = 12;
+            this.maintenanceStaff.Text = "Bakım Personeli Ata";
+            this.maintenanceStaff.UseVisualStyleBackColor = true;
+            this.maintenanceStaff.Click += new System.EventHandler(this.maintenanceStaff_Click);
+            // 
             // Istasyon
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.maintenanceStaff);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.comboBox1);
             this.Controls.Add(this.deleteId);
@@ -195,5 +207,6 @@ namespace WinFormsApp
         private System.Windows.Forms.TextBox deleteId;
         private System.Windows.Forms.ComboBox comboBox1;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Button maintenanceStaff;
     }
 }

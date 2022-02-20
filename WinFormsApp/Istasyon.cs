@@ -31,8 +31,8 @@ namespace WinFormsApp
             dataGridView1.Columns[2].Name = "Basınç";
             dataGridView1.Columns[3].Name = "Isı";
             dataGridView1.Columns[4].Name = "Durum";
-            dataGridView1.Columns[5].Name = "Üretim Yol Id";
-            dataGridView1.Columns[6].Name = "Bakım Çalışanı Id";
+            dataGridView1.Columns[5].Name = "Üretim Yol";
+            dataGridView1.Columns[6].Name = "Bakım Çalışanı Mail";
         }
 
         private async void Istasyon_Load(object sender, EventArgs e)
@@ -65,8 +65,8 @@ namespace WinFormsApp
             dataGridView1.Rows[i].Cells[2].Value = station.Pressure;
             dataGridView1.Rows[i].Cells[3].Value = station.Temperature;
             dataGridView1.Rows[i].Cells[4].Value = station.Status;
-            dataGridView1.Rows[i].Cells[5].Value = station.LineId;
-            dataGridView1.Rows[i].Cells[6].Value = station.MaintenanceStaffId;
+            dataGridView1.Rows[i].Cells[5].Value = station.ProductionLine.LineName;
+            dataGridView1.Rows[i].Cells[6].Value = station.MaintenanceStaff.Mail;
         }
 
         private async void getall_Click(object sender, EventArgs e)
@@ -82,8 +82,8 @@ namespace WinFormsApp
                 dataGridView1.Rows[i].Cells[2].Value = stations[i].Pressure;
                 dataGridView1.Rows[i].Cells[3].Value = stations[i].Temperature;
                 dataGridView1.Rows[i].Cells[4].Value = stations[i].Status;
-                dataGridView1.Rows[i].Cells[5].Value = stations[i].LineId;
-                dataGridView1.Rows[i].Cells[6].Value = stations[i].MaintenanceStaffId;
+                dataGridView1.Rows[i].Cells[5].Value = stations[i].ProductionLine.LineName;
+                dataGridView1.Rows[i].Cells[6].Value = stations[i].MaintenanceStaff.Mail;
             }
         }
 
@@ -134,9 +134,15 @@ namespace WinFormsApp
                 dataGridView1.Rows[i].Cells[2].Value = stations[i].Pressure;
                 dataGridView1.Rows[i].Cells[3].Value = stations[i].Temperature;
                 dataGridView1.Rows[i].Cells[4].Value = stations[i].Status;
-                dataGridView1.Rows[i].Cells[5].Value = stations[i].LineId;
-                dataGridView1.Rows[i].Cells[6].Value = stations[i].MaintenanceStaffId;
+                dataGridView1.Rows[i].Cells[5].Value = stations[i].ProductionLine.LineName;
+                dataGridView1.Rows[i].Cells[6].Value = stations[i].MaintenanceStaff.Mail;
             }
+        }
+
+        private void maintenanceStaff_Click(object sender, EventArgs e)
+        {
+            IstasyonPersoneliDegistir istasyonPersoneliDegistir = new IstasyonPersoneliDegistir();
+            istasyonPersoneliDegistir.ShowDialog();
         }
     }
 }

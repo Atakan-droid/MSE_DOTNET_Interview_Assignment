@@ -62,6 +62,18 @@ namespace Business.Concrete
             }
         }
 
+        public Result<Station> ChangeStationStaff(int stationId, int userId)
+        {
+            var isStationExist = _stationDal.Get(s => s.Id == stationId);
+            if (isStationExist == null) { return new Result<Station>(false,Messages.StationNotFound); }
+            var isUserExist = _userService.GetUserById(userId);
+            if (!isUserExist.Success) { return new Result<Station>(false,Messages.UserNotFound); }
+            isStationExist.MaintenanceStaffId = userId;
+            isStationExist.ModifiedDate = DateTime.Now;
+            _stationDal.Update(isStationExist);
+            return new Result<Station>(true, Messages.StationStaffChanged);
+        }
+
         public Result<Station> DeleteStation(int stationId)
         {
             var IsStationExist = _stationDal.Get(u => u.Id == stationId);
@@ -80,7 +92,7 @@ namespace Business.Concrete
 
         public Result<Station> GetStationById(int stationId)
         {
-            var result = _stationDal.Get(u => u.Id == stationId);
+            var result = _stationDal.Get(u => u.Id == stationId, predicate => predicate.MaintenanceStaff, c => c.ProductionLine);
             if (result != null)
             {
                 return new Result<Station>(result, true, Messages.StationGot);
@@ -92,7 +104,7 @@ namespace Business.Concrete
         {
             var IsLineExist = _productionLineService.GetProductionLineById(productionLineId);
             if (!IsLineExist.Success) { return new Result<List<Station>>(false, IsLineExist.Message); }
-            var result = _stationDal.GetAll(u => u.LineId == productionLineId);
+            var result = _stationDal.GetAll(u => u.LineId == productionLineId, predicate => predicate.MaintenanceStaff, c => c.ProductionLine);
             if (result != null)
             {
                 return new Result<List<Station>>(result, true, Messages.StationGot);
@@ -101,7 +113,7 @@ namespace Business.Concrete
         }
         public Result<List<Station>> GetStationByProductionLineName(string productionLineName)
         {    
-            var result = _stationDal.GetAll(u => u.ProductionLine.LineName == productionLineName);
+            var result = _stationDal.GetAll(u => u.ProductionLine.LineName == productionLineName, predicate => predicate.MaintenanceStaff, c => c.ProductionLine);
             if (result != null)
             {
                 return new Result<List<Station>>(result, true, Messages.StationGot);
@@ -113,7 +125,7 @@ namespace Business.Concrete
         {
             var IsUserExist = _userService.GetUserById(userId);
             if (!IsUserExist.Success) { return new Result<List<Station>>(false, IsUserExist.Message); }
-            var result = _stationDal.GetAll(u => u.MaintenanceStaffId == userId);
+            var result = _stationDal.GetAll(u => u.MaintenanceStaffId == userId, predicate => predicate.MaintenanceStaff, c => c.ProductionLine);
             if (result != null)
             {
                 return new Result<List<Station>>(result, true, Messages.StationGot);
@@ -123,7 +135,7 @@ namespace Business.Concrete
 
         public Result<List<Station>> GetStations()
         {
-            return new Result<List<Station>>(_stationDal.GetAll(u => u.IsDeleted == false),true,Messages.StationGot);
+            return new Result<List<Station>>(_stationDal.GetAll(u => u.IsDeleted == false,predicate=>predicate.MaintenanceStaff,c=>c.ProductionLine),true,Messages.StationGot);
         }
 
         public Result<Station> HardDeleteStation(int stationId)

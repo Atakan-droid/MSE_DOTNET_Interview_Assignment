@@ -118,6 +118,20 @@ namespace WebAPI.Controllers
             }
 
         }
+        [HttpPost("updatestationstaff/{stationId}/{userId}")]
+        public IActionResult UpdateStationStaff(int stationId, int userId)
+        {
+            var result = _stationService.ChangeStationStaff(stationId,userId);
+            if (result.Success)
+            {
+                return Ok(result.Message);
+            }
+            else
+            {
+                return BadRequest(result.Message);
+            }
+
+        }
         [HttpGet("deletestation/{id}")]
         public IActionResult DeleteStation(int id)
         {

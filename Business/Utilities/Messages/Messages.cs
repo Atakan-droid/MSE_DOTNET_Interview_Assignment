@@ -45,7 +45,9 @@ namespace Business.Utilities.Messages
         public static string TempratureHigh = "Isı Yüksek";
         public static string PressureLow = "Basınç düşük";
         public static string PressureHigh ="Basınç Yüksek";
-        public static string MailSent = "Mail Yollandı";
-        public static string MailNotSent = "Mail Gönderilemedi";
+        public static string MailSent = "Sorun Maili Yollandı";
+        public static string MailNotSent = "Sorun Maili Gönderilemedi";
+
+        public static string StationStaffChanged = "İstasyon Bakım Yetkilisi Değiştirildi / Eklendi";
     }
 }
