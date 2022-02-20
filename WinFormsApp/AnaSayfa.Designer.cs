@@ -32,11 +32,12 @@ namespace WinFormsApp
             this.KullaniciIslemleri = new System.Windows.Forms.Button();
             this.IstasyonIslemleri = new System.Windows.Forms.Button();
             this.UretimYolu = new System.Windows.Forms.Button();
+            this.label1 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // KullaniciIslemleri
             // 
-            this.KullaniciIslemleri.Location = new System.Drawing.Point(63, 57);
+            this.KullaniciIslemleri.Location = new System.Drawing.Point(68, 184);
             this.KullaniciIslemleri.Name = "KullaniciIslemleri";
             this.KullaniciIslemleri.Size = new System.Drawing.Size(160, 55);
             this.KullaniciIslemleri.TabIndex = 0;
@@ -46,7 +47,7 @@ namespace WinFormsApp
             // 
             // IstasyonIslemleri
             // 
-            this.IstasyonIslemleri.Location = new System.Drawing.Point(309, 57);
+            this.IstasyonIslemleri.Location = new System.Drawing.Point(314, 184);
             this.IstasyonIslemleri.Name = "IstasyonIslemleri";
             this.IstasyonIslemleri.Size = new System.Drawing.Size(160, 55);
             this.IstasyonIslemleri.TabIndex = 1;
@@ -56,7 +57,7 @@ namespace WinFormsApp
             // 
             // UretimYolu
             // 
-            this.UretimYolu.Location = new System.Drawing.Point(548, 57);
+            this.UretimYolu.Location = new System.Drawing.Point(553, 184);
             this.UretimYolu.Name = "UretimYolu";
             this.UretimYolu.Size = new System.Drawing.Size(160, 55);
             this.UretimYolu.TabIndex = 2;
@@ -64,11 +65,22 @@ namespace WinFormsApp
             this.UretimYolu.UseVisualStyleBackColor = true;
             this.UretimYolu.Click += new System.EventHandler(this.UretimYolu_Click);
             // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Segoe UI", 25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.label1.Location = new System.Drawing.Point(203, 50);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(401, 46);
+            this.label1.TabIndex = 3;
+            this.label1.Text = "DOTNET_DEV_Homework";
+            // 
             // AnaSayfa
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 141);
+            this.ClientSize = new System.Drawing.Size(800, 287);
+            this.Controls.Add(this.label1);
             this.Controls.Add(this.UretimYolu);
             this.Controls.Add(this.IstasyonIslemleri);
             this.Controls.Add(this.KullaniciIslemleri);
@@ -76,6 +88,7 @@ namespace WinFormsApp
             this.Text = "Ana Sayfa";
             this.Load += new System.EventHandler(this.AnaSayfa_Load);
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -84,6 +97,7 @@ namespace WinFormsApp
         private System.Windows.Forms.Button KullaniciIslemleri;
         private System.Windows.Forms.Button IstasyonIslemleri;
         private System.Windows.Forms.Button UretimYolu;
+        private System.Windows.Forms.Label label1;
     }
 }
 
