@@ -90,9 +90,9 @@ namespace WinFormsApp
 
         private void geridon_Click(object sender, EventArgs e)
         {
-            AnaSayfa anaSayfa = new AnaSayfa();
+            
             this.Hide();
-            anaSayfa.ShowDialog();
+            this.DialogResult = DialogResult.OK;
         }
 
         private void label1_Click(object sender, EventArgs e)

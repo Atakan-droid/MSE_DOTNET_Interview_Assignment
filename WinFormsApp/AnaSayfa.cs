@@ -27,6 +27,7 @@ namespace WinFormsApp
             Kullanici user = new Kullanici();
             this.Hide();
             user.ShowDialog();
+            this.Show();
         }
 
         private void IstasyonIslemleri_Click(object sender, EventArgs e)
@@ -34,6 +35,7 @@ namespace WinFormsApp
             Istasyon istasyon = new Istasyon();
             this.Hide();
             istasyon.ShowDialog();
+            this.Show();
         }
 
         private void UretimYolu_Click(object sender, EventArgs e)
@@ -41,6 +43,7 @@ namespace WinFormsApp
             UretimYolu uretimYolu = new UretimYolu();
             this.Hide();
             uretimYolu.ShowDialog();
+            this.Show();
         }
     }
 }

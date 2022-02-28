@@ -47,9 +47,9 @@ namespace WinFormsApp
 
         private void geridon_Click(object sender, EventArgs e)
         {
-            AnaSayfa anaSayfa = new AnaSayfa();
+           
             this.Hide();
-            anaSayfa.ShowDialog();
+            this.DialogResult = DialogResult.OK;
         }
 
         private async void button2_Click(object sender, EventArgs e)
